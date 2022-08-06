@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 # player_spec.rb
+require './lib/player'
 
 describe Player do
   describe '#initialize' do
-    subject(:player) { Player.new('Player 1', "\u26AA") }
+    subject(:player) { described_class.new('Player 1', "\u26AA") }
 
     it 'returns the player name' do
       expect(player.name).to eq('Player 1')
