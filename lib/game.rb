@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'player'
+# require_relative 'player'
 
 # contains all the logic needed for the game to be played
 class Game
