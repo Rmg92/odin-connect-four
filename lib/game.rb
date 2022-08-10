@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
-# require_relative 'player'
+require_relative 'display'
 
 # contains all the logic needed for the game to be played
 class Game
+  include Display
+
   def play
+    display_rules
     create_players
   end
 
