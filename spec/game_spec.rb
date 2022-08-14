@@ -28,4 +28,16 @@ describe Game do
       expect(create_players.instance_variable_get(:@player_two).piece).to eq("\u26AB")
     end
   end
+
+  describe '#create_board' do
+    subject(:new_board) { described_class.new }
+
+    before do
+      new_board.create_board
+    end
+
+    it 'creates @board instance variable with a new board' do
+      expect(new_board.instance_variable_get(:@board)).to be_a Board
+    end
+  end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'display'
+require_relative 'player'
+require_relative 'board'
 
 # contains all the logic needed for the game to be played
 class Game
@@ -8,7 +10,12 @@ class Game
 
   def play
     display_rules
+    setup_game
+  end
+
+  def setup_game
     create_players
+    create_board
   end
 
   def create_players
@@ -16,5 +23,9 @@ class Game
     @player_one = Player.new(gets, "\u26AA")
     puts 'Insert player 2 name?'
     @player_two = Player.new(gets, "\u26AB")
+  end
+
+  def create_board
+    @board = Board.new
   end
 end
