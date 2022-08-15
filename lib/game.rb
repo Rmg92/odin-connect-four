@@ -8,6 +8,8 @@ require_relative 'board'
 class Game
   include Display
 
+  PIECES = ["\u26AA", "\u26AB"].freeze
+
   def play
     display_rules
     setup_game
@@ -19,10 +21,13 @@ class Game
   end
 
   def create_players
-    puts 'Insert player 1 name?'
-    @player_one = Player.new(gets, "\u26AA")
-    puts 'Insert player 2 name?'
-    @player_two = Player.new(gets, "\u26AB")
+    @player_one = new_player(1)
+    @player_two = new_player(2)
+  end
+
+  def new_player(player_number)
+    puts "Hello Player #{player_number}, what's your name?"
+    Player.new(gets, PIECES[player_number - 1])
   end
 
   def create_board

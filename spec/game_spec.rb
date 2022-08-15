@@ -3,41 +3,42 @@
 require './lib/game'
 
 describe Game do
+  subject(:game) { described_class.new }
   describe '#create_players' do
-    subject(:create_players) { described_class.new }
+    context 'when creating player 1' do
+      before do
+        allow(game).to receive(:puts)
+        allow(game).to receive(:gets).and_return('Jarvis')
+      end
 
-    before do
-      allow(create_players).to receive(:puts)
-      allow(create_players).to receive(:gets).and_return('Jarvis')
-      create_players.create_players
+      it "creates a new player named Jarvis with \u26AA piece" do
+        expect(Player).to receive(:new).with('Jarvis', "\u26AA")
+        game.new_player(1)
+      end
     end
 
-    it 'assigns Jarvis as player 1 name' do
-      expect(create_players.instance_variable_get(:@player_one).name).to eq('Jarvis')
-    end
+    context 'when creating player 2' do
+      before do
+        allow(game).to receive(:puts)
+        allow(game).to receive(:gets).and_return('Jordan')
+      end
 
-    it "returns \u26AA as player 1 piece" do
-      expect(create_players.instance_variable_get(:@player_one).piece).to eq("\u26AA")
-    end
-
-    it 'returns Jarvis as player 2 name' do
-      expect(create_players.instance_variable_get(:@player_two).name).to eq('Jarvis')
-    end
-
-    it "returns \u26AB as player 2 piece" do
-      expect(create_players.instance_variable_get(:@player_two).piece).to eq("\u26AB")
+      it "creates a new player named Jordan with \u26AB piece" do
+        expect(Player).to receive(:new).with('Jordan', "\u26AB")
+        game.new_player(2)
+      end
     end
   end
 
   describe '#create_board' do
-    subject(:new_board) { described_class.new }
-
     before do
-      new_board.create_board
+      game.create_board
     end
 
-    it 'creates @board instance variable with a new board' do
-      expect(new_board.instance_variable_get(:@board)).to be_a Board
+    context 'when creating a new board' do
+      it 'creates @board instance variable with a new board' do
+        expect(game.instance_variable_get(:@board)).to be_a Board
+      end
     end
   end
 end
