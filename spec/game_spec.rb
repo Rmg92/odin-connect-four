@@ -41,4 +41,29 @@ describe Game do
       end
     end
   end
+
+  describe '#player_drop_input' do
+    context 'when receiving a valid input' do
+      input = 3
+      before do
+        allow(game).to receive(:gets).and_return(input)
+      end
+
+      it 'returns the input' do
+        expect(game.player_drop_input).to eq(input)
+      end
+    end
+
+    context 'when receiving invalid input' do
+      input = 'a'
+      before do
+        allow(game).to receive(:gets).and_return(input, 2)
+      end
+
+      it "ask's for new input" do
+        expect(game).to receive(:player_drop_input)
+        game.player_drop_input
+      end
+    end
+  end
 end

@@ -13,11 +13,17 @@ class Game
   def play
     display_rules
     setup_game
+    play_round
   end
 
   def setup_game
     create_players
     create_board
+  end
+
+  def play_round
+    puts 'Chose a column to drop your piece' # to move to display module
+    player_drop_input
   end
 
   def create_players
@@ -26,11 +32,19 @@ class Game
   end
 
   def new_player(player_number)
-    puts "Hello Player #{player_number}, what's your name?"
+    puts "Hello Player #{player_number}, what's your name?" # to move to display module
     Player.new(gets, PIECES[player_number - 1])
   end
 
   def create_board
     @board = Board.new
+  end
+
+  def player_drop_input
+    input = gets.to_i
+    return input if input.between?(1, 7)
+
+    puts 'Invalid input'
+    player_drop_input
   end
 end
