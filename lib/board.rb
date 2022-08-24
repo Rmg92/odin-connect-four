@@ -18,7 +18,7 @@ class Board
   end
 
   def find_empty_row(column)
-    row = 6
+    row = @board[column - 1].length - 1
     row -= 1 until (@board[column - 1][row]).nil?
     row
   end

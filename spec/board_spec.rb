@@ -24,8 +24,7 @@ describe Board do
       end
 
       it 'drops a piece at the end of an empty column' do
-        # expect { new_board.drop_piece(3, "\u26AA") }.to change(new_board.board[2][6]).from(nil).to("\u26AA")
-        expect(new_board.board[2][6]).to eq("\u26AA")
+        expect(new_board.board[2][5]).to eq("\u26AA")
       end
 
       it 'drops a piece on top of another piece' do
