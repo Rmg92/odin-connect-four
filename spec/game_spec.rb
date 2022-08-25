@@ -12,7 +12,7 @@ describe Game do
       end
 
       it "creates a new player named Jarvis with \u26AA piece" do
-        expect(Player).to receive(:new).with('Jarvis', "\u26AA")
+        expect(Player).to receive(:new).with('Jarvis', "\e[32m\u25CF\e[0m")
         game.new_player(1)
       end
     end
@@ -24,7 +24,7 @@ describe Game do
       end
 
       it "creates a new player named Jordan with \u26AB piece" do
-        expect(Player).to receive(:new).with('Jordan', "\u26AB")
+        expect(Player).to receive(:new).with('Jordan', "\e[31m\u25CF\e[0m")
         game.new_player(2)
       end
     end
@@ -47,6 +47,7 @@ describe Game do
       input = 3
       before do
         allow(game).to receive(:gets).and_return(input)
+        allow(@board).to receive(:full_column?).and_return(false)
       end
 
       it 'returns the input' do

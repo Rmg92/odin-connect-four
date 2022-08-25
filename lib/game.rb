@@ -8,22 +8,26 @@ require_relative 'board'
 class Game
   include Display
 
-  PIECES = ["\u26AA", "\u26AB"].freeze
+  PIECES = ["\e[32m\u25CF\e[0m", "\e[31m\u25CF\e[0m"].freeze
 
   def play
-    display_rules
+    display_rules(PIECES)
     setup_game
-    play_round
+    play_round until @winner || @round == 43
   end
 
   def setup_game
+    @winner = false
+    @round = 1
     create_players
     create_board
   end
 
   def play_round
-    puts 'Chose a column to drop your piece' # to move to display module
-    player_drop_input
+    display_current_round(@player_one.name)
+    @board.drop_piece(player_drop_input, current_player.piece)
+    display_board(@board.board)
+    @round += 1
   end
 
   def create_players
@@ -32,7 +36,7 @@ class Game
   end
 
   def new_player(player_number)
-    puts "Hello Player #{player_number}, what's your name?" # to move to display module
+    display_player_name(player_number)
     Player.new(gets, PIECES[player_number - 1])
   end
 
@@ -42,9 +46,15 @@ class Game
 
   def player_drop_input
     input = gets.to_i
-    return input if input.between?(1, 7)
+    return input unless !input.between?(1, 7) || @board.full_column?(input)
 
     puts 'Invalid input'
     player_drop_input
+  end
+
+  def current_player
+    return @player_one if @round.odd?
+
+    @player_two
   end
 end
