@@ -33,4 +33,40 @@ describe Board do
       end
     end
   end
+
+  describe '#full_column?' do
+    let(:full_column_board) { described_class.new }
+
+    before do
+      full_column_board.instance_variable_set(:@board, [[1, 2, 3]])
+    end
+
+    context 'checks if selected column is full' do
+      it 'returns false if column is not full' do
+        expect(new_board.full_column?(1)).to eq(false)
+      end
+
+      it 'returns true if column is full' do
+        expect(full_column_board.full_column?(1)).to eq(true)
+      end
+    end
+  end
+
+  describe '#vertical_connected' do
+    let(:column_four_connected) { described_class.new }
+
+    before do
+      column_four_connected.instance_variable_set(:@board, [[1, 1, 1, 1, 3]])
+    end
+
+    context 'checks if there is four equal pieces vertically connected' do
+      it 'returns false if not' do
+        expect(new_board.vertical_connected).to eq(false)
+      end
+
+      it 'returns true if yes' do
+        expect(column_four_connected.vertical_connected).to eq(true)
+      end
+    end
+  end
 end

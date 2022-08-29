@@ -13,7 +13,7 @@ class Game
   def play
     display_rules(PIECES)
     setup_game
-    play_round until @winner || @round == 43
+    play_round until winner? || @round == 43
   end
 
   def setup_game
@@ -24,7 +24,7 @@ class Game
   end
 
   def play_round
-    display_current_round(@player_one.name)
+    display_current_round(current_player.name)
     @board.drop_piece(player_drop_input, current_player.piece)
     display_board(@board.board)
     @round += 1
@@ -56,5 +56,9 @@ class Game
     return @player_one if @round.odd?
 
     @player_two
+  end
+
+  def winner?
+    @board.four_connected?
   end
 end

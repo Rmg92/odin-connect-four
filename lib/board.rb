@@ -22,4 +22,31 @@ class Board
     row -= 1 until (@board[column - 1][row]).nil?
     row
   end
+
+  def full_column?(column)
+    return true unless @board[column - 1].any?(nil)
+
+    false
+  end
+
+  def four_connected?
+    return true if vertical_connected?
+
+    false
+  end
+
+  def vertical_connected?
+    @board.each do |column|
+      column.each_with_index do |value, index|
+        pieces = [value]
+        next if value.nil?
+
+        pieces << column[index + 1]
+        pieces << column[index + 2]
+        pieces << column[index + 3]
+        return true if pieces.all?(value)
+      end
+    end
+    false
+  end
 end
