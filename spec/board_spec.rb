@@ -52,7 +52,7 @@ describe Board do
     end
   end
 
-  describe '#vertical_connected' do
+  describe '#vertical_connected?' do
     let(:column_four_connected) { described_class.new }
 
     before do
@@ -61,11 +61,11 @@ describe Board do
 
     context 'checks if there is four equal pieces vertically connected' do
       it 'returns false if not' do
-        expect(new_board.vertical_connected).to eq(false)
+        expect(new_board.vertical_connected?).to eq(false)
       end
 
       it 'returns true if yes' do
-        expect(column_four_connected.vertical_connected).to eq(true)
+        expect(column_four_connected.vertical_connected?).to eq(true)
       end
     end
   end
