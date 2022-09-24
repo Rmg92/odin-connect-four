@@ -69,4 +69,40 @@ describe Board do
       end
     end
   end
+
+  describe '#horizontal_connected?' do
+    let(:row_connected) { described_class.new }
+
+    before do
+      row_connected.instance_variable_set(:@board, [[1, 1, 1, 1, 3], [1, 1, 1, 1, 3], [1, 1, 1, 1, 3], [1, 1, 1, 1, 3]])
+    end
+
+    context 'checks if there is four equal pieces vertically connected' do
+      it 'returns false if not' do
+        expect(new_board.horizontal_connected?).to eq(false)
+      end
+
+      it 'returns true if yes' do
+        expect(row_connected.horizontal_connected?).to eq(true)
+      end
+    end
+  end
+
+  describe '#up_diagonally_connected?' do
+    let(:row_connected) { described_class.new }
+
+    before do
+      row_connected.instance_variable_set(:@board, [[3, 1, 1, 1, 1], [1, 3, 1, 1, 1], [1, 1, 3, 1, 1], [1, 1, 1, 3, 1]])
+    end
+
+    context 'checks if there is four equal pieces vertically connected' do
+      it 'returns false if not' do
+        expect(new_board.horizontal_connected?).to eq(false)
+      end
+
+      it 'returns true if yes' do
+        expect(row_connected.horizontal_connected?).to eq(true)
+      end
+    end
+  end
 end

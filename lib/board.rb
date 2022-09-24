@@ -49,4 +49,21 @@ class Board
     end
     false
   end
+
+  def horizontal_connected?
+    @board.each_with_index do |column, column_index|
+      column.each_with_index do |value, row_index|
+        pieces = [value]
+        next if value.nil?
+
+        pieces << @board[column_index + 1][row_index]
+        pieces << @board[column_index + 2][row_index]
+        pieces << @board[column_index + 3][row_index]
+        return true if pieces.all?(value)
+      end
+    end
+    false
+  end
+
+  
 end
