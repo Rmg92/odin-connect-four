@@ -30,7 +30,7 @@ class Board
   end
 
   def four_connected?
-    return true if vertical_connected?
+    return true if vertical_connected? || horizontal_connected? || down_diagonally_connected? || up_diagonally_connected?
 
     false
   end
@@ -52,6 +52,8 @@ class Board
 
   def horizontal_connected?
     @board.each_with_index do |column, column_index|
+      next if column_index > 3
+
       column.each_with_index do |value, row_index|
         pieces = [value]
         next if value.nil?
@@ -65,5 +67,37 @@ class Board
     false
   end
 
-  
+  def down_diagonally_connected?
+    @board.each_with_index do |column, column_index|
+      next if column_index > 3
+
+      column.each_with_index do |value, row_index|
+        pieces = [value]
+        next if value.nil?
+
+        pieces << @board[column_index + 1][row_index + 1]
+        pieces << @board[column_index + 2][row_index + 2]
+        pieces << @board[column_index + 3][row_index + 3]
+        return true if pieces.all?(value)
+      end
+    end
+    false
+  end
+
+  def up_diagonally_connected?
+    @board.each_with_index do |column, column_index|
+      next if column_index > 3
+
+      column.each_with_index do |value, row_index|
+        pieces = [value]
+        next if value.nil?
+
+        pieces << @board[column_index + 1][row_index - 1]
+        pieces << @board[column_index + 2][row_index - 2]
+        pieces << @board[column_index + 3][row_index - 3]
+        return true if pieces.all?(value)
+      end
+    end
+    false
+  end
 end
