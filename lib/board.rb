@@ -30,7 +30,9 @@ class Board
   end
 
   def four_connected?
-    return true if vertical_connected? || horizontal_connected? || down_diagonally_connected? || up_diagonally_connected?
+    if vertical_connected? || horizontal_connected? || down_diagonally_connected? || up_diagonally_connected?
+      return true
+    end
 
     false
   end
@@ -38,12 +40,10 @@ class Board
   def vertical_connected?
     @board.each do |column|
       column.each_with_index do |value, index|
-        pieces = [value]
         next if value.nil?
 
-        pieces << column[index + 1]
-        pieces << column[index + 2]
-        pieces << column[index + 3]
+        pieces = [value]
+        [1, 2, 3].each { |i| pieces << column[index + i] }
         return true if pieces.all?(value)
       end
     end
@@ -55,12 +55,10 @@ class Board
       next if column_index > 3
 
       column.each_with_index do |value, row_index|
-        pieces = [value]
         next if value.nil?
 
-        pieces << @board[column_index + 1][row_index]
-        pieces << @board[column_index + 2][row_index]
-        pieces << @board[column_index + 3][row_index]
+        pieces = [value]
+        [1, 2, 3].each { |i| pieces << @board[column_index + i][row_index] }
         return true if pieces.all?(value)
       end
     end
@@ -72,12 +70,10 @@ class Board
       next if column_index > 3
 
       column.each_with_index do |value, row_index|
-        pieces = [value]
         next if value.nil?
 
-        pieces << @board[column_index + 1][row_index + 1]
-        pieces << @board[column_index + 2][row_index + 2]
-        pieces << @board[column_index + 3][row_index + 3]
+        pieces = [value]
+        [1, 2, 3].each { |i| pieces << @board[column_index + i][row_index + i] }
         return true if pieces.all?(value)
       end
     end
@@ -89,12 +85,10 @@ class Board
       next if column_index > 3
 
       column.each_with_index do |value, row_index|
-        pieces = [value]
         next if value.nil?
 
-        pieces << @board[column_index + 1][row_index - 1]
-        pieces << @board[column_index + 2][row_index - 2]
-        pieces << @board[column_index + 3][row_index - 3]
+        pieces = [value]
+        [1, 2, 3].each { |i| pieces << @board[column_index + i][row_index - i] }
         return true if pieces.all?(value)
       end
     end

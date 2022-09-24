@@ -5,3 +5,6 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'spec/*'
+Layout/LineLength:
+  Exclude:
+    - 'spec/*'
