@@ -4,10 +4,13 @@
 module Display
   def display_rules(pieces)
     puts <<-HEREDOC
+  Welcome to Connect Four!  
   Connect four is a two player game.
-  Each turn a player will chose one of seven columns to drop a Piece.
+
   Player 1 will start the game and has the #{pieces[0]} pieces.
   Player 2 has the #{pieces[1]} pieces.
+
+  Each turn a player will chose one of seven columns to drop a Piece.
     HEREDOC
   end
 
@@ -25,10 +28,20 @@ module Display
   end
 
   def display_current_round(player)
-    puts "/n It's your turn #{player}! Choose a column to drop a piece"
+    puts "\nIt's your turn #{player}! Choose a column to drop a piece"
   end
 
   def display_player_name(player_number)
-    puts "Hello Player #{player_number}, what's your name?"
+    puts "\nHello Player #{player_number}, what's your name?"
+  end
+
+  def display_invalid_input
+    puts "\nInvalid Input! Please select a column from 1 to 7"
+  end
+
+  def display_winner(winner)
+    puts "\nGame ended with a Tie!" if winner == false
+
+    puts "\nGame ended! #{winner} wins the game!"
   end
 end

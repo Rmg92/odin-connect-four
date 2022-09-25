@@ -49,7 +49,7 @@ class Game
     input = gets.to_i
     return input unless !input.between?(1, 7) || @board.full_column?(input)
 
-    puts 'Invalid input'
+    display_invalid_input
     player_drop_input
   end
 
@@ -64,12 +64,12 @@ class Game
   end
 
   def announce_winner
-    puts 'Game end! Tie!' if @round == 43
+    display_winner(false) if @round == 43
 
     if current_player == @player_one
-      puts "Game end! #{@player_two.name} wins the game!"
+      display_winner(@player_two.name)
     elsif current_player == @player_two
-      puts "Game end! #{@player_one.name} wins the game!"
+      display_winner(@player_one.name)
     end
   end
 end
