@@ -14,6 +14,7 @@ class Game
     display_rules(PIECES)
     setup_game
     play_round until winner? || @round == 43
+    announce_winner
   end
 
   def setup_game
@@ -37,7 +38,7 @@ class Game
 
   def new_player(player_number)
     display_player_name(player_number)
-    Player.new(gets, PIECES[player_number - 1])
+    Player.new(gets.chomp, PIECES[player_number - 1])
   end
 
   def create_board
@@ -60,5 +61,15 @@ class Game
 
   def winner?
     @board.four_connected?
+  end
+
+  def announce_winner
+    puts 'Game end! Tie!' if @round == 43
+
+    if current_player == @player_one
+      puts "Game end! #{@player_two.name} wins the game!"
+    elsif current_player == @player_two
+      puts "Game end! #{@player_one.name} wins the game!"
+    end
   end
 end

@@ -25,7 +25,7 @@ module Display
   end
 
   def display_current_round(player)
-    puts "It's your turn #{player}! Choose a column to drop a piece"
+    puts "/n It's your turn #{player}! Choose a column to drop a piece"
   end
 
   def display_player_name(player_number)
